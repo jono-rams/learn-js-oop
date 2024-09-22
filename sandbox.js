@@ -23,11 +23,28 @@ class User{
   }
 }
 
+class Admin extends User {
+  constructor(username, email, password, title){
+    super(username, email);
+    this.password = password;
+    this.title = title;
+  }
+  deleteUser(user){
+    users = users.filter(u => {
+      return u.username !== user.username;
+    });
+  }
+}
+
+// create instances of User and Admin class and test methods
+
 const userOne = new User('mario', 'mario@gmail.com');
 const userTwo = new User('luigi', 'luigi@gmail.com');
+const adminOne = new Admin('admin', 'admin@gmail.com', 'admin123', 'server admin');
 
-console.log(userOne, userTwo);
+let users = [userOne, userTwo, adminOne];
+console.log(users);
 
-userOne.login();
-userOne.incScore().incScore().incScore().incScore();
-userTwo.logout();
+adminOne.deleteUser(userTwo);
+console.log(users);
+
